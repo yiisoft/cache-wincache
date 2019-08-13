@@ -6,3 +6,4 @@
 /phpunit.xml.dist   export-ignore
 /tests              export-ignore
 /docs               export-ignore
+/.appveyor.yml      export-ignore

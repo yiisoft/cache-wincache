@@ -1,6 +1,5 @@
 build: false
 version: dev-{build}
-shallow_clone: true
 clone_folder: C:\projects\cache-wincache
 
 environment:
@@ -25,9 +24,16 @@ install:
   - echo memory_limit=512M >> php.ini
   - echo extension_dir=ext >> php.ini
   - echo extension=php_mbstring.dll >> php.ini
+  - echo extension=php_openssl.dll >> php.ini
+  - echo extension=php_curl.dll >> php.ini
+  - echo extension=php_fileinfo.dll >> php.ini
   - echo extension=php_wincache.dll >> php.ini
   - echo wincache.enablecli=1 >> php.ini
   - IF NOT EXIST C:\tools\composer.phar (cd C:\tools && appveyor DownloadFile https://getcomposer.org/download/1.4.1/composer.phar)
+  - cd C:\tools\php\ext
+  - choco install 7zip.install
+  - appveyor DownloadFile https://netcologne.dl.sourceforge.net/project/wincache/development/wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
+  - 7z e wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
 
 before_test:
   - cd C:\projects\cache-wincache
