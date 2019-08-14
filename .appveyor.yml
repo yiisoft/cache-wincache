@@ -33,7 +33,7 @@ install:
   - cd C:\tools\php\ext
   - choco install 7zip.install
   - appveyor DownloadFile https://netcologne.dl.sourceforge.net/project/wincache/development/wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
-  - 7z e wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
+  - 7z e -y wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
 
 before_test:
   - cd C:\projects\cache-wincache
