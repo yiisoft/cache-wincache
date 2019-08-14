@@ -1,6 +1,6 @@
 <?php
 
-namespace Yiisoft\WinCache\Tests;
+namespace Yiisoft\Cache\WinCache\Tests;
 
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;

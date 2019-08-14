@@ -1,12 +1,12 @@
 <?php
 
-namespace Yiisoft\WinCache\Tests;
+namespace Yiisoft\Cache\WinCache\Tests;
 
 use DateInterval;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use ReflectionException;
-use Yiisoft\WinCache\WinCache;
+use Yiisoft\Cache\WinCache\WinCache;
 
 class WinCacheTest extends TestCase
 {

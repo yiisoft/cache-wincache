@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Yiisoft\\WinCache\\": "src"
+            "Yiisoft\\Cache\\WinCache\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Yiisoft\\WinCache\\Tests\\": "tests"
+            "Yiisoft\\Cache\\WinCache\\Tests\\": "tests"
         }
     },
     "extra": {
