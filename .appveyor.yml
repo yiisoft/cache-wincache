@@ -4,7 +4,7 @@ clone_folder: C:\projects\cache-wincache
 
 environment:
   matrix:
-    - php_ver: 7.2.4
+    - php_ver: 7.4.2
 
 cache:
   - '%APPDATA%\Composer'
@@ -29,11 +29,15 @@ install:
   - echo extension=php_fileinfo.dll >> php.ini
   - echo extension=php_wincache.dll >> php.ini
   - echo wincache.enablecli=1 >> php.ini
-  - IF NOT EXIST C:\tools\composer.phar (cd C:\tools && appveyor DownloadFile https://getcomposer.org/download/1.4.1/composer.phar)
+  - IF NOT EXIST C:\tools\composer.phar (cd C:\tools && appveyor DownloadFile https://getcomposer.org/download/1.9.3/composer.phar)
   - cd C:\tools\php\ext
   - choco install 7zip.install
-  - appveyor DownloadFile https://netcologne.dl.sourceforge.net/project/wincache/development/wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
-  - 7z e -y wincache-2.0.0.8-dev-7.2.beta2-nts-vc15-x64.exe
+  - appveyor DownloadFile https://netcologne.dl.sourceforge.net/project/wincache/development/wincache-2.0.0.8-dev-7.4-nts-vc15-x64.exe
+  - 7z e -y wincache-2.0.0.8-dev-7.4-nts-vc15-x64.exe
+  
+  
+  
+  
 
 before_test:
   - cd C:\projects\cache-wincache
