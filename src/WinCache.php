@@ -132,7 +132,7 @@ class WinCache implements CacheInterface
      */
     private function validateKey($key): void
     {
-        if (!\is_string($key)) {
+        if (!\is_string($key) || strpbrk($key, '{}()/\@:')) {
             throw new InvalidArgumentException('Invalid key value.');
         }
     }
