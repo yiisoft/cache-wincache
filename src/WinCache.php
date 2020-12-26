@@ -7,6 +7,23 @@ namespace Yiisoft\Cache\WinCache;
 use DateInterval;
 use DateTime;
 use Psr\SimpleCache\CacheInterface;
+use Traversable;
+
+use function array_fill_keys;
+use function array_flip;
+use function array_keys;
+use function array_map;
+use function gettype;
+use function is_array;
+use function is_iterable;
+use function is_string;
+use function iterator_to_array;
+use function strpbrk;
+use function wincache_ucache_clear;
+use function wincache_ucache_delete;
+use function wincache_ucache_exists;
+use function wincache_ucache_get;
+use function wincache_ucache_set;
 
 /**
  * WinCache provides Windows Cache caching in terms of an application component.
@@ -16,14 +33,15 @@ use Psr\SimpleCache\CacheInterface;
  *
  * See {@see \Psr\SimpleCache\CacheInterface} for common cache operations that are supported by WinCache.
  */
-class WinCache implements CacheInterface
+final class WinCache implements CacheInterface
 {
     private const TTL_INFINITY = 0;
+    private const TTL_EXPIRED = -1;
 
     public function get($key, $default = null)
     {
         $this->validateKey($key);
-        $value = \wincache_ucache_get($key, $success);
+        $value = wincache_ucache_get($key, $success);
         return $success ? $value : $default;
     }
 
@@ -31,30 +49,32 @@ class WinCache implements CacheInterface
     {
         $this->validateKey($key);
         $ttl = $this->normalizeTtl($ttl);
-        if ($ttl < 0) {
+
+        if ($ttl <= self::TTL_EXPIRED) {
             return $this->delete($key);
         }
-        return \wincache_ucache_set($key, $value, $ttl);
+
+        return wincache_ucache_set($key, $value, $ttl);
     }
 
     public function delete($key): bool
     {
         $this->validateKey($key);
-        return \wincache_ucache_delete($key);
+        return wincache_ucache_delete($key);
     }
 
     public function clear(): bool
     {
-        return \wincache_ucache_clear();
+        return wincache_ucache_clear();
     }
 
     public function getMultiple($keys, $default = null): iterable
     {
         $keys = $this->iterableToArray($keys);
         $this->validateKeys($keys);
-        $valuesFromCache = \wincache_ucache_get($keys);
-        $valuesFromCache = $this->normalizeWinCacheOutput($valuesFromCache);
+        $valuesFromCache = $this->normalizeWinCacheOutput(wincache_ucache_get($keys));
         $values = array_fill_keys($keys, $default);
+
         foreach ($values as $key => $value) {
             $values[$key] = $valuesFromCache[$key] ?? $value;
         }
@@ -68,55 +88,59 @@ class WinCache implements CacheInterface
         $this->validateKeysOfValues($values);
         $ttl = $this->normalizeTtl($ttl);
 
-        return \wincache_ucache_set($values, null, $ttl) === [];
+        return wincache_ucache_set($values, null, $ttl) === [];
     }
 
     public function deleteMultiple($keys): bool
     {
         $keys = $this->iterableToArray($keys);
         $this->validateKeys($keys);
-        /** @var array $deleted */
-        $deleted = \wincache_ucache_delete($keys);
+        $deleted = wincache_ucache_delete($keys);
+
+        if (!is_array($deleted)) {
+            return false;
+        }
+
         $deleted = array_flip($deleted);
+
         foreach ($keys as $expectedKey) {
             if (!isset($deleted[$expectedKey])) {
                 return false;
             }
         }
+
         return true;
     }
 
     public function has($key): bool
     {
         $this->validateKey($key);
-        return \wincache_ucache_exists($key);
+        return wincache_ucache_exists($key);
     }
 
     /**
-     * @noinspection PhpDocMissingThrowsInspection DateTime won't throw exception because constant string is passed as time
-     *
      * Normalizes cache TTL handling `null` value, strings and {@see DateInterval} objects.
      *
-     * @param DateInterval|int|string|null $ttl raw TTL.
+     * @param DateInterval|int|string|null $ttl The raw TTL.
      *
-     * @return int TTL value as UNIX timestamp
+     * @return int TTL value as UNIX timestamp.
      */
-    private function normalizeTtl($ttl): ?int
+    private function normalizeTtl($ttl): int
     {
-        $normalizedTtl = $ttl;
+        if ($ttl === null) {
+            return self::TTL_INFINITY;
+        }
+
         if ($ttl instanceof DateInterval) {
-            $normalizedTtl = (new DateTime('@0'))->add($ttl)->getTimestamp();
+            return (new DateTime('@0'))->add($ttl)->getTimestamp();
         }
 
-        if (is_string($normalizedTtl)) {
-            $normalizedTtl = (int)$normalizedTtl;
-        }
-
-        return $normalizedTtl ?? static::TTL_INFINITY;
+        $ttl = (int) $ttl;
+        return $ttl > 0 ? $ttl : self::TTL_EXPIRED;
     }
 
     /**
-     * Converts iterable to array. If provided value is not iterable it throws an InvalidArgumentException
+     * Converts iterable to array. If provided value is not iterable it throws an InvalidArgumentException.
      *
      * @param mixed $iterable
      *
@@ -128,7 +152,7 @@ class WinCache implements CacheInterface
             throw new InvalidArgumentException('Iterable is expected, got ' . gettype($iterable));
         }
 
-        return $iterable instanceof \Traversable ? iterator_to_array($iterable) : (array)$iterable;
+        return $iterable instanceof Traversable ? iterator_to_array($iterable) : (array) $iterable;
     }
 
     /**
@@ -136,7 +160,7 @@ class WinCache implements CacheInterface
      */
     private function validateKey($key): void
     {
-        if (!\is_string($key) || strpbrk($key, '{}()/\@:')) {
+        if (!is_string($key) || $key === '' || strpbrk($key, '{}()/\@:')) {
             throw new InvalidArgumentException('Invalid key value.');
         }
     }
@@ -161,10 +185,10 @@ class WinCache implements CacheInterface
     }
 
     /**
-     * Normalizes keys returned from wincache_ucache_get in multiple mode. If one of the keys is an integer (123) or a string
-     * representation of an integer ('123') the returned key from the cache doesn't equal neither to an integer nor a
-     * string ($key !== 123 and $key !== '123'). Coping element from the returned array one by one to the new array
-     * fixes this issue.
+     * Normalizes keys returned from wincache_ucache_get in multiple mode. If one of the keys is an integer (123) or a
+     * string representation of an integer ('123') the returned key from the cache doesn't equal neither to an integer
+     * nor a string ($key !== 123 and $key !== '123'). Coping element from the returned array one by one to the new
+     * array fixes this issue.
      *
      * @param array $values
      *
@@ -173,6 +197,7 @@ class WinCache implements CacheInterface
     private function normalizeWinCacheOutput(array $values): array
     {
         $normalizedValues = [];
+
         foreach ($values as $key => $value) {
             $normalizedValues[$key] = $value;
         }
