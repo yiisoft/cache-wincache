@@ -9,7 +9,7 @@ jobs:
     name: PHP ${{ matrix.php }}-${{ matrix.os }}
 
     env:
-      extensions: curl, fileinfo, mbstring, openssl, wincache
+      extensions: curl, fileinfo, mbstring, openssl
       key: cache-v1
 
     runs-on: ${{ matrix.os }}
@@ -33,7 +33,7 @@ jobs:
           extensions: ${{ env.extensions }}
           ini-values: date.timezone='UTC'
           coverage: pcov
-          tools: composer:v2, pecl
+          tools: composer:v2
 
       - name: Determine composer cache directory
         run: echo "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append

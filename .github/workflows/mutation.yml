@@ -11,7 +11,7 @@ jobs:
     name: PHP ${{ matrix.php }}-${{ matrix.os }}
 
     env:
-      extensions: curl, fileinfo, mbstring, openssl, wincache
+      extensions: curl, fileinfo, mbstring, openssl
 
     runs-on: ${{ matrix.os }}
 
