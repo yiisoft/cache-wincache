@@ -8,7 +8,13 @@
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/cache-wincache/v/stable.png)](https://packagist.org/packages/yiisoft/cache-wincache)
 [![Total Downloads](https://poser.pugx.org/yiisoft/cache-wincache/downloads.png)](https://packagist.org/packages/yiisoft/cache-wincache)
-[![Build Status](https://ci.appveyor.com/api/projects/status/qh46x5yf67k3i9hc/branch/master?svg=true)](https://ci.appveyor.com/project/samdark/cache-wincache)
+[![Build status](https://github.com/yiisoft/cache-wincache/workflows/build/badge.svg)](https://github.com/yiisoft/form/actions?query=workflow%3Abuild)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/yiisoft/form/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/form/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/yiisoft/form/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/yiisoft/form/?branch=master)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyiisoft%2Fcache-wincache%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/yiisoft/cache-wincache/master)
+[![static analysis](https://github.com/yiisoft/form/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/form/actions?query=workflow%3A%22static+analysis%22)
+[![type-coverage](https://shepherd.dev/github/yiisoft/form/coverage.svg)](https://shepherd.dev/github/yiisoft/form)
+
 
 This package uses the PHP [Windows Cache](https://sourceforge.net/projects/wincache/)
 ([see also](https://www.php.net/manual/book.wincache.php)) extension and implements
@@ -70,6 +76,22 @@ The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
 ./vendor/bin/phpunit
 ```
 
+### Mutation testing
+
+The package tests are checked with [Infection](https://infection.github.io/) mutation framework. To run it:
+
+```shell
+./vendor/bin/infection
+```
+
+### Static analysis
+
+The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
+
+```shell
+./vendor/bin/psalm
+```
+
 ### Support the project
 
 [![Open Collective](https://img.shields.io/badge/Open%20Collective-sponsor-7eadf1?logo=open%20collective&logoColor=7eadf1&labelColor=555555)](https://opencollective.com/yiisoft)
@@ -84,7 +106,7 @@ The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
 
 ## License
 
-The Yii Logging Library is free software. It is released under the terms of the BSD License.
+The Yii Cache Library - WinCache Handler is free software. It is released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
