@@ -54,11 +54,6 @@ jobs:
         with:
           args: install 7zip
 
-      - name: Choco install wget
-        uses: crazy-max/ghaction-chocolatey@v1
-        with:
-          args: install wget
-
       - uses: suisei-cn/actions-download-file@v1
         id: wincache
         name: Download WinCache
