@@ -71,3 +71,4 @@ jobs:
 
       - name: Static analysis
         run: vendor/bin/psalm --shepherd --stats --output-format=checkstyle | cs2pr --graceful-warnings --colorize
+        shell: bash
