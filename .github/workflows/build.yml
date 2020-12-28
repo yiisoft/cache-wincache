@@ -86,4 +86,4 @@ jobs:
       - name: Upload code coverage scrutinizer windows
         run: |
           wget https://scrutinizer-ci.com/ocular.phar
-          php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+          php ocular.phar code-coverage:upload --repository=yiisoft/cache-wincache --format=php-clover coverage.clover
