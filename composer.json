@@ -39,6 +39,9 @@
             "Yiisoft\\Cache\\WinCache\\Tests\\": "tests"
         }
     },
+    "provide": {
+        "psr/simple-cache-implementation": "1.0.0"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "3.0.x-dev"
