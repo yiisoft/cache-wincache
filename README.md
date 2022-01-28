@@ -19,6 +19,11 @@ This package uses the PHP [Windows Cache](https://sourceforge.net/projects/winca
 ([see also](https://www.php.net/manual/book.wincache.php)) extension and implements
 [PSR-16](https://www.php-fig.org/psr/psr-16/) cache.
 
+## Requirements
+
+- PHP 7.4.
+- `WinCache` PHP extension.
+
 ## Installation
 
 The package could be installed with composer:
@@ -66,6 +71,8 @@ To work with values in a more efficient manner, batch operations should be used:
 - `deleteMultiple()`
 
 This package can be used as a cache handler for the [Yii Caching Library](https://github.com/yiisoft/cache).
+
+## Testing
 
 ### Unit testing
 
