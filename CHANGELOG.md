@@ -1,6 +1,6 @@
 # Yii WinCache Change Log
 
-## 1.0.1 under development
+## 1.0.1 January 28, 2022
 
 - Bug #31: Remove PHP 8 support due to lack of PHP extension (devanych)
 
