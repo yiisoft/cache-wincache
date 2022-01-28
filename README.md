@@ -29,7 +29,7 @@ This package uses the PHP [Windows Cache](https://sourceforge.net/projects/winca
 The package could be installed with composer:
 
 ```
-composer require yiisoft/cache-wincache
+composer require yiisoft/cache-wincache --prefer-dist
 ```
 
 ## General usage
