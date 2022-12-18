@@ -28,6 +28,6 @@ jobs:
     uses: yiisoft/actions/.github/workflows/composer-require-checker.yml@master
     with:
       os: >-
-        ['ubuntu-latest']
+        ['windows-latest']
       php: >-
         ['7.4']
