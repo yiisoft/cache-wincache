@@ -14,7 +14,6 @@
 [![static analysis](https://github.com/yiisoft/cache-wincache/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/cache-wincache/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/cache-wincache/coverage.svg)](https://shepherd.dev/github/yiisoft/cache-wincache)
 
-
 This package uses the PHP [Windows Cache](https://sourceforge.net/projects/wincache/)
 ([see also](https://www.php.net/manual/book.wincache.php)) extension and implements
 [PSR-16](https://www.php-fig.org/psr/psr-16/) cache.
@@ -28,7 +27,7 @@ This package uses the PHP [Windows Cache](https://sourceforge.net/projects/winca
 
 The package could be installed with composer:
 
-```
+```shell
 composer require yiisoft/cache-wincache --prefer-dist
 ```
 
