@@ -73,7 +73,7 @@ This package can be used as a cache handler for the [Yii Caching Library](https:
 
 ## Documentation
 
-- More information can be found in the [Internals.](docs/internals.md)
+- [Internals](docs/internals.md)
 
 ## Support
 
