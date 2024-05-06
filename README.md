@@ -25,7 +25,7 @@ This package uses the PHP [Windows Cache](https://sourceforge.net/projects/winca
 
 ## Installation
 
-The package could be installed with [composer](https://getcomposer.org/download/)
+The package could be installed with [Composer](https://getcomposer.org):
 
 ```shell
 composer require yiisoft/cache-wincache
