@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
     <h1 align="center">Yii Cache Library - WinCache Handler</h1>
     <br>
@@ -15,7 +15,7 @@
 [![type-coverage](https://shepherd.dev/github/yiisoft/cache-wincache/coverage.svg)](https://shepherd.dev/github/yiisoft/cache-wincache)
 
 This package uses the PHP [Windows Cache](https://sourceforge.net/projects/wincache/)
-([see also](https://www.php.net/manual/book.wincache.php)) extension and implements
+(see also [Windows Cache for PHP](https://www.php.net/manual/book.wincache.php)) extension and implements
 [PSR-16](https://www.php-fig.org/psr/psr-16/) cache.
 
 ## Requirements
