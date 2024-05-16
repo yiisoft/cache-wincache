@@ -69,9 +69,10 @@ To work with values in a more efficient manner, batch operations should be used:
 - `setMultiple()`
 - `deleteMultiple()`
 
+This package can be used as a cache handler for the [Yii Caching Library](https://github.com/yiisoft/cache).
+
 ## Documentation
 
-- This package can be used as a cache handler for the [Yii Caching Library](https://github.com/yiisoft/cache).
 - [Internals](docs/internals.md)
 
 If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
