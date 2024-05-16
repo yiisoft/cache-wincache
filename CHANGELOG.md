@@ -1,4 +1,4 @@
-# Yii WinCache Change Log
+# Yii Cache Library - WinCache Handler Change Log
 
 ## 1.0.2 under development
 

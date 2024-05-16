@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
+        <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px" alt="Yii">
     </a>
     <h1 align="center">Yii Cache Library - WinCache Handler</h1>
     <br>
@@ -15,7 +15,7 @@
 [![type-coverage](https://shepherd.dev/github/yiisoft/cache-wincache/coverage.svg)](https://shepherd.dev/github/yiisoft/cache-wincache)
 
 This package uses the PHP [Windows Cache](https://sourceforge.net/projects/wincache/)
-([see also](https://www.php.net/manual/book.wincache.php)) extension and implements
+(see also [Windows Cache for PHP](https://www.php.net/manual/book.wincache.php)) extension and implements
 [PSR-16](https://www.php-fig.org/psr/psr-16/) cache.
 
 ## Requirements
@@ -25,10 +25,10 @@ This package uses the PHP [Windows Cache](https://sourceforge.net/projects/winca
 
 ## Installation
 
-The package could be installed with composer:
+The package could be installed with [Composer](https://getcomposer.org):
 
 ```shell
-composer require yiisoft/cache-wincache --prefer-dist
+composer require yiisoft/cache-wincache
 ```
 
 ## General usage
@@ -75,10 +75,15 @@ This package can be used as a cache handler for the [Yii Caching Library](https:
 
 - [Internals](docs/internals.md)
 
-## Support
-
 If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
 You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
+
+## License
+
+The Yii Cache Library - WinCache Handler is free software. It is released under the terms of the BSD License.
+Please see [`LICENSE`](./LICENSE.md) for more information.
+
+Maintained by [Yii Software](https://www.yiiframework.com/).
 
 ## Support the project
 
@@ -91,10 +96,3 @@ You may also check out other [Yii Community Resources](https://www.yiiframework.
 [![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=flat&logo=telegram)](https://t.me/yii3en)
 [![Facebook](https://img.shields.io/badge/facebook-join-1DA1F2?style=flat&logo=facebook&logoColor=ffffff)](https://www.facebook.com/groups/yiitalk)
 [![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=flat&logo=slack)](https://yiiframework.com/go/slack)
-
-## License
-
-The Yii Cache Library - WinCache Handler is free software. It is released under the terms of the BSD License.
-Please see [`LICENSE`](./LICENSE.md) for more information.
-
-Maintained by [Yii Software](https://www.yiiframework.com/).
