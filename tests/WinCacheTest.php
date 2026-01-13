@@ -26,11 +26,6 @@ final class WinCacheTest extends TestCase
 {
     private WinCache $cache;
 
-    public function setUp(): void
-    {
-        $this->cache = new WinCache();
-    }
-
     public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('wincache')) {
@@ -44,6 +39,11 @@ final class WinCacheTest extends TestCase
         if (!ini_get('wincache.ucenabled')) {
             self::markTestSkipped('Wincache user cache disabled. Enable with "wincache.ucenabled" from php.ini. Skipping.');
         }
+    }
+
+    public function setUp(): void
+    {
+        $this->cache = new WinCache();
     }
 
     public function dataProvider(): array
@@ -239,7 +239,7 @@ final class WinCacheTest extends TestCase
 
         $this->cache->deleteMultiple($keys);
 
-        $emptyData = array_map(static fn ($v) => null, $data);
+        $emptyData = array_map(static fn($v) => null, $data);
 
         $this->assertSameExceptObject($emptyData, $this->cache->getMultiple($keys));
     }
@@ -323,7 +323,7 @@ final class WinCacheTest extends TestCase
             ],
             'IteratorAggregate' => [
                 ['a' => 1, 'b' => 2,],
-                new class () implements IteratorAggregate {
+                new class implements IteratorAggregate {
                     public function getIterator(): ArrayIterator
                     {
                         return new ArrayIterator(['a' => 1, 'b' => 2,]);
@@ -357,7 +357,7 @@ final class WinCacheTest extends TestCase
             'null' => [null],
             'bool' => [true],
             'object' => [new stdClass()],
-            'callable' => [fn () => 'key'],
+            'callable' => [fn() => 'key'],
             'psr-reserved' => ['{}()/\@:'],
             'empty-string' => [''],
         ];
