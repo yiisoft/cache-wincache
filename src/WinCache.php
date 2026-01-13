@@ -31,7 +31,7 @@ use function wincache_ucache_set;
  * To use this application component, the [WinCache PHP extension](https://sourceforge.net/projects/wincache/)
  * must be loaded. Also note that "wincache.ucenabled" should be set to "1" in your php.ini file.
  *
- * See {@see \Psr\SimpleCache\CacheInterface} for common cache operations that are supported by WinCache.
+ * See {@see CacheInterface} for common cache operations that are supported by WinCache.
  */
 final class WinCache implements CacheInterface
 {
