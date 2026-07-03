@@ -11,4 +11,5 @@ jobs:
   roave_bc_check:
     uses: yiisoft/actions/.github/workflows/bc.yml@master
     with:
-      php: '["8.4"]'
+      composer-require-options: '--with-all-dependencies --ignore-platform-req=ext-wincache --no-progress --ansi'
+      php: '["7.4"]'
