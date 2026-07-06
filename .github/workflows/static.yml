@@ -65,7 +65,7 @@ jobs:
         run: composer self-update
 
       - name: Choco install 7zip
-        uses: crazy-max/ghaction-chocolatey@e80bd39bb49cae70b67ea53d52d00833a7255c21
+        uses: crazy-max/ghaction-chocolatey@dfdcf5bba9c0a16358a21c13a06ec5c89024b3ac
         with:
           args: install 7zip
 
