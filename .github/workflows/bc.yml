@@ -3,13 +3,13 @@ on:
   push:
 
 name: backwards compatibility
+
+permissions:
+  contents: read
+
 jobs:
-    roave_bc_check:
-        name: Roave BC Check
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@master
-            - name: fetch tags
-              run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-            - name: Roave BC Check
-              uses: docker://nyholm/roave-bc-check-ga
+  roave_bc_check:
+    uses: yiisoft/actions/.github/workflows/bc.yml@master
+    with:
+      composer-require-options: '--with-all-dependencies --ignore-platform-req=ext-wincache --ignore-platform-req=php --no-progress --ansi'
+      php: '["8.4"]'
