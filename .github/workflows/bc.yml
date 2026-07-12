@@ -1,8 +1,14 @@
+name: backwards compatibility
+
 on:
   pull_request:
+    paths: &paths
+      - 'src/**'
+      - '.github/workflows/bc.yml'
+      - 'composer.json'
   push:
-
-name: backwards compatibility
+    branches: ['master']
+    paths: *paths
 
 permissions:
   contents: read
@@ -12,4 +18,5 @@ jobs:
     uses: yiisoft/actions/.github/workflows/bc.yml@master
     with:
       composer-require-options: '--with-all-dependencies --ignore-platform-req=ext-wincache --ignore-platform-req=php --no-progress --ansi'
-      php: '["8.4"]'
+      php: >-
+        ['8.1']
