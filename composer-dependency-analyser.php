@@ -8,8 +8,8 @@ use ShipMonk\ComposerDependencyAnalyser\Config\ErrorType;
 return (new Configuration())
     ->disableComposerAutoloadPathScan()
     ->setFileExtensions(['php'])
-    ->addPathToScan(__DIR__ . '/src', isDev: false)
-    ->addPathToScan(__DIR__ . '/tests', isDev: true)
+    ->addPathToScan(__DIR__ . '/src', false)
+    ->addPathToScan(__DIR__ . '/tests', true)
     // ext-wincache is Windows-only, so it can't be loaded in the analyser's runtime.
     ->ignoreUnknownFunctions([
         'wincache_ucache_clear',
