@@ -21,7 +21,51 @@ concurrency:
 
 jobs:
   composer-dependency-analyser:
-    uses: yiisoft/actions/.github/workflows/composer-dependency-analyser.yml@master
-    with:
-      php: >-
-        ['7.4']
+    name: PHP ${{ matrix.php }}-${{ matrix.os }}
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        php:
+          - 7.4
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          coverage: none
+
+      - name: Choco install 7zip
+        uses: crazy-max/ghaction-chocolatey@dfdcf5bba9c0a16358a21c13a06ec5c89024b3ac # v4.1.0
+        with:
+          args: install 7zip
+
+      - uses: suisei-cn/actions-download-file@9f75b8c2dad5ccced7509c44a3b881c5613abde2 # v1.6.1
+        id: wincache
+        name: Download WinCache
+        with:
+          url: "https://downloads.sourceforge.net/project/wincache/development/wincache-2.0.0.8-dev-7.4-nts-vc15-x64.exe"
+          target: C:\tools\php\ext
+
+      - name: Install WinCache
+        run: |
+          cd C:\tools\php\ext
+          7z e -y wincache-2.0.0.8-dev-7.4-nts-vc15-x64.exe
+
+      - name: Update php.ini
+        run: |
+          cd C:\tools\php
+          echo extension=php_wincache.dll >> php.ini
+          echo wincache.enablecli=1 >> php.ini
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+
+      - name: Check dependencies
+        run: vendor/bin/composer-dependency-analyser
