@@ -36,9 +36,10 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.92.5",
-        "rector/rector": "^2.3.0",
         "phpunit/phpunit": "^9.5",
+        "rector/rector": "^2.3.0",
         "roave/infection-static-analysis-plugin": "^1.16",
+        "shipmonk/composer-dependency-analyser": "^1.8.4",
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^4.18"
     },
@@ -63,6 +64,7 @@
         }
     },
     "scripts": {
+        "dependency-analyser": "composer-dependency-analyser",
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch"
     }
