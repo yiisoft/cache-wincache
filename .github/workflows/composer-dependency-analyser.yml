@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   composer-dependency-analyser:
-    name: PHP ${{ matrix.php }}-${{ matrix.os }}
+    name: PHP ${{ matrix.php }}
     runs-on: windows-latest
     strategy:
       matrix:
